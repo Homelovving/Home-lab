@@ -32,4 +32,14 @@ The plan is simple: build, break, fix, document. Publicly.
 
 ---
 
+## Progress
+
+- **June 8, 2026:** Initial setup complete
+  - Created Ubuntu Server 24.04 LTS (ARM64) VM on UTM
+  - Allocated 8GB RAM, 4 CPU cores, 60GB storage
+  - Configured LVM storage layout
+  - Installed OpenSSH Server
+  - Successfully SSH'd into the server from macOS Terminal
+
+---
 *This repo is a work in progress. Check back soon.*
