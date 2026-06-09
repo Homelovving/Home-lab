@@ -43,13 +43,34 @@ The plan is simple: build, break, fix, document. Publicly.
 
 ---
 - **June 9, 2026:** Docker installation and configuration
-  - Installed Docker CE, Docker CLI, containerd, 
-    Buildx and Compose plugins
-  - Added user to docker group — sudo no longer 
-    required for docker commands
-  - Verified Docker engine working via hello-world container
-  - Docker Compose v5.1.4 confirmed installed
-  - All installation commands sourced from official 
-    Docker documentation (docs.docker.com)
-    
+  - sudo apt install ca-certificates curl — installed security
+    certificates and download tool needed for Docker setup
+  - sudo install -m 0755 -d /etc/apt/keyrings — created a
+    directory to store Docker's cryptographic verification key
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg — downloaded and stored Docker's official GPG key for package verification
+  - echo "deb [arch=arm64 signed-by=...] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null — registered Docker's official   repository as a trusted software source
+  - sudo apt update — refreshed package lists to include Docker's repository
+  - sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin — installed Docker engine, CLI, runtime, and plugins
+  - sudo usermod -aG docker $USER — added user to docker group to run Docker commands without sudo
+  - docker run hello-world — verified Docker installation was working correctly
+  - docker compose version — confirmed Docker Compose v5.1.4 installed
+  - All commands sourced from official Docker documentation: docs.docker.com/engine/install/ubuntu
+
+- **June 9, 2026:** Jellyfin media server deployment
+  - mkdir -p ~/homelab/jellyfin — created dedicated directory for Jellyfin
+  - cd ~/homelab/jellyfin — navigated into Jellyfin directory
+  - nano docker-compose.yml — created Docker Compose configuration file defining Jellyfin's image, ports, and persistent volumes
+  - docker compose up -d — pulled Jellyfin image from Docker Hub and started container in background
+  - docker ps — verified Jellyfin container was running and healthy on port 8096
+  - Completed Jellyfin initial setup via browser at http://[server-ip]:8096
+
+- **June 9, 2026:** Issues encountered and fixes
+  - Media folder permissions denied — Docker created the media folder as root, blocking file uploads via scp. Fixed with sudo chown -R $USER:$USER ~/homelab/jellyfin/media which transferred folder ownership to current user
+  - Interface confusion — initially attempted to play videos from the Dashboard (admin/settings area) instead of the Home screen. Videos are played from the Jellyfin home screen, accessible by clicking the Jellyfin logo. Dashboard is for server administration only. Both MOV and MP4 files confirmed playing correctly from home screen.
+  - Diagnosed container issues using
+    ```
+    docker logs jellyfin
+    ```
+
+
 *This repo is a work in progress. Check back soon.*
