@@ -42,4 +42,14 @@ The plan is simple: build, break, fix, document. Publicly.
   - Successfully SSH'd into the server from macOS Terminal
 
 ---
+- **June 9, 2026:** Docker installation and configuration
+  - Installed Docker CE, Docker CLI, containerd, 
+    Buildx and Compose plugins
+  - Added user to docker group — sudo no longer 
+    required for docker commands
+  - Verified Docker engine working via hello-world container
+  - Docker Compose v5.1.4 confirmed installed
+  - All installation commands sourced from official 
+    Docker documentation (docs.docker.com)
+    
 *This repo is a work in progress. Check back soon.*
